@@ -1,0 +1,140 @@
+import xml.etree.ElementTree as ET
+
+twb_content = """<?xml version='1.0' encoding='utf-8' ?>
+<workbook source-build='2024.1.0' version='18.1' xmlns:user='http://www.tableausoftware.com/xml/user'>
+  <document-location>
+    <project-name>Global Fuel Prices and Taxation Trends</project-name>
+  </document-location>
+  <preferences>
+  </preferences>
+  <datasources>
+    <datasource caption='Global Fuel Prices Dataset' inline='true' name='federated.fuel_data' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='global_fuel_prices_Dataset' name='textscan.fuel_csv'>
+            <connection class='textscan' directory='.' filename='global_fuel_prices_Dataset.csv' />
+          </named-connection>
+        </named-connections>
+      </connection>
+      <aliases enabled='yes' />
+      <column datatype='date' name='[date]' role='dimension' type='ordinal' />
+      <column datatype='string' name='[country]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
+      <column datatype='string' name='[region]' role='dimension' type='nominal' />
+      <column datatype='string' name='[income_level]' role='dimension' type='nominal' />
+      <column datatype='string' name='[subsidy_level]' role='dimension' type='nominal' />
+      <column datatype='real' name='[petrol_usd_liter]' role='measure' type='quantitative' />
+      <column datatype='real' name='[diesel_usd_liter]' role='measure' type='quantitative' />
+      <column datatype='real' name='[lpg_usd_liter]' role='measure' type='quantitative' />
+      <column datatype='real' name='[brent_crude_usd]' role='measure' type='quantitative' />
+      <column datatype='real' name='[tax_percentage]' role='measure' type='quantitative' />
+    </datasource>
+  </datasources>
+  <worksheets>
+    <worksheet name='KPI - Fuel Indicators'>
+      <table>
+        <view>
+          <datasources>
+            <datasource name='federated.fuel_data' />
+          </datasources>
+        </view>
+      </table>
+    </worksheet>
+    <worksheet name='Geospatial - Petrol Price Map'>
+      <table>
+        <view>
+          <datasources>
+            <datasource name='federated.fuel_data' />
+          </datasources>
+        </view>
+      </table>
+    </worksheet>
+    <worksheet name='Geospatial - Diesel Price Map'>
+      <table>
+        <view>
+          <datasources>
+            <datasource name='federated.fuel_data' />
+          </datasources>
+        </view>
+      </table>
+    </worksheet>
+    <worksheet name='Trend - Petrol Prices (2020-2026)'>
+      <table>
+        <view>
+          <datasources>
+            <datasource name='federated.fuel_data' />
+          </datasources>
+        </view>
+      </table>
+    </worksheet>
+    <worksheet name='Trend - Diesel Prices (2020-2026)'>
+      <table>
+        <view>
+          <datasources>
+            <datasource name='federated.fuel_data' />
+          </datasources>
+        </view>
+      </table>
+    </worksheet>
+    <worksheet name='Trend - LPG Prices (2020-2026)'>
+      <table>
+        <view>
+          <datasources>
+            <datasource name='federated.fuel_data' />
+          </datasources>
+        </view>
+      </table>
+    </worksheet>
+    <worksheet name='Trend - Brent Crude Oil'>
+      <table>
+        <view>
+          <datasources>
+            <datasource name='federated.fuel_data' />
+          </datasources>
+        </view>
+      </table>
+    </worksheet>
+    <worksheet name='Regional Tax Distribution'>
+      <table>
+        <view>
+          <datasources>
+            <datasource name='federated.fuel_data' />
+          </datasources>
+        </view>
+      </table>
+    </worksheet>
+    <worksheet name='Highest Tax Nations'>
+      <table>
+        <view>
+          <datasources>
+            <datasource name='federated.fuel_data' />
+          </datasources>
+        </view>
+      </table>
+    </worksheet>
+    <worksheet name='Top 3 Nations Price Comparison'>
+      <table>
+        <view>
+          <datasources>
+            <datasource name='federated.fuel_data' />
+          </datasources>
+        </view>
+      </table>
+    </worksheet>
+  </worksheets>
+  <dashboards>
+    <dashboard name='Global Fuel Prices and Taxation Trends'>
+      <style />
+      <size maxheight='1080' maxwidth='1920' minheight='768' minwidth='1024' sizing-mode='proportional' />
+    </dashboard>
+  </dashboards>
+  <windows>
+    <window class='dashboard' name='Global Fuel Prices and Taxation Trends'>
+      <viewpoint />
+    </window>
+  </windows>
+</workbook>
+"""
+
+with open('Global_Fuel_Analytics.twb', 'w', encoding='utf-8') as f:
+    f.write(twb_content.strip())
+print("Created Global_Fuel_Analytics.twb successfully!")
